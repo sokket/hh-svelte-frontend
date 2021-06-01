@@ -45,9 +45,10 @@
 <style>
     .form-content {
         max-width: 400px;
-        margin: 0 auto;
+        margin: 30pt auto 0;
     }
 </style>
+
 
 <div class="form-content">
     <h4>Новая команда</h4>

@@ -3,14 +3,27 @@
 </script>
 
 <style>
-    .title {
-        font-family: "Roboto", serif;
-        font-size: 36pt;
+    @media only screen and (max-width : 600px) {
+        .title {
+            font-size: 20pt;
+        }
+
+        .desc {
+            font-size: 15pt;
+        }
+    }
+
+    @media only screen and (min-width : 601px) {
+        .title {
+            font-size: 30pt;
+        }
+
+        .desc {
+            font-size: 20pt;
+        }
     }
 
     .desc {
-        font-family: Roboto, serif;
-        font-size: 20pt;
         margin-bottom: 20pt;
         color: #797979;
     }
@@ -29,6 +42,6 @@
     <div class="title">Правильно оценим испытательный срок</div>
     <div class="desc">Организуем задачи, соберём фидбэк и оценки</div>
     <Button style="font-size: 15pt" outline
-            on:click={() => window.location = "/api/dev/oauth?url=http://127.0.0.1:3000/createTeam"}>Начать
+            on:click={() => window.location = "/api/oauth/login"}>Начать
     </Button>
 </div>

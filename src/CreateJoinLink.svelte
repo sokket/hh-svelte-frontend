@@ -1,8 +1,8 @@
 <script>
     import {Button} from 'svelte-chota';
-    import {getRoleName} from './utils.js';
+    import {getRoleName, baseURL} from './utils.js';
 
-    const baseUrl = 'http://192.168.14.62:3000/api/invite_links/';
+    let url =  baseURL + '/api/invite_links/';
 
     let selected = -1;
     let link = null;
@@ -48,7 +48,7 @@
         <option disabled selected>Выберите роль</option>
         <option value="2">Менеджер</option>
         <option value="1">Сотрудник</option>
-        <option value="0">Испытуемый</option>
+        <option value="0">Соискатель</option>
     </select>
 
     <Button outline disabled={selected === -1} on:click={createLink}>Создать</Button>
@@ -57,7 +57,7 @@
     <h4>Ссылка создана</h4>
     <div class="role-text">Роль: {getRoleName(link.role_id)}</div>
     <input bind:this={linkElem} class="link-box" id="input" type="text"
-           value="{baseUrl + link.code}"/>
+           value="{url + link.code}"/>
     <div>
         <Button outline on:click={() => {
                             linkElem.select()

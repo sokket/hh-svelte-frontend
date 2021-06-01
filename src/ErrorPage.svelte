@@ -1,6 +1,9 @@
 <script>
     import {Button} from 'svelte-chota';
-    import {link} from "svelte-routing";
+    import {link, navigate} from "svelte-routing";
+
+    export let errorCode;
+    export let errorMessage;
 </script>
 
 <style>
@@ -8,7 +11,6 @@
         margin: 0 auto;
         text-align: center;
         width: min-content;
-        font-family: "Roboto", serif;
     }
 
     .not-found-code {
@@ -24,8 +26,8 @@
 
 
 <div class="not-found-container">
-    <div class="not-found-code">404</div>
-    <div class="not-found-text">Страницы не существует</div>
+    <div class="not-found-code">{errorCode}</div>
+    <div class="not-found-text">{errorMessage}</div>
     <a href="/" use:link>
         <Button outline>Вернуться на главную</Button>
     </a>

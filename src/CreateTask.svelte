@@ -1,6 +1,7 @@
 <script>
     import {Button, Input} from 'svelte-chota';
-    import {getRoleName} from './utils.js';
+    import {getPersons, getRoleName} from './utils.js';
+    import autosize from "autosize";
 
     export let closeAndRefresh;
 
@@ -8,15 +9,6 @@
     let taskDescription = '';
     let selectedProbationer = -1;
     let selectedPerformer = -1;
-
-    function getPersons(type) {
-        return fetch('/api/' + type, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then(it => it.json())
-    }
 
     function createTask() {
         fetch('/api/tasks', {
@@ -49,8 +41,7 @@
 
 <select bind:value={selectedPerformer}>
     <option disabled selected>Исполнитель</option>
-    {#await getPersons('performers')}
-    {:then performers}
+    {#await getPersons('performers') then performers}
         {#each performers as performer}
             <option value="{performer.id}">{performer.last_name} {performer.first_name}
                 ({getRoleName(performer.role_id)})
@@ -61,14 +52,15 @@
 
 <select bind:value={selectedProbationer}>
     <option disabled selected>Соискатель</option>
-    {#await getPersons('probationers')}
-    {:then probationers}
+    {#await getPersons('probationers') then probationers}
         {#each probationers as probationer}
             <option value="{probationer.id}">{probationer.last_name} {probationer.first_name}</option>
         {/each}
     {/await}
 </select>
 
-<p><Input bind:value={taskDescription} textarea placeholder="Описание задачи"/></p>
+<textarea use:autosize bind:value={taskDescription}
+          style="overflow: hidden; resize: none; max-height: 150pt"
+          placeholder="Описание задачи"></textarea>
 
 <Button outline disabled={isBtnDisabled} on:click={createTask}>Создать</Button>
