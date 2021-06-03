@@ -1,5 +1,5 @@
 <script>
-    import VirtualList from '@sveltejs/svelte-virtual-list';
+    import InfiniteLoading from './infinity-scroll/InfiniteLoading.svelte';
 
     export let status;
     export let openTask;
@@ -13,13 +13,40 @@
         }).then((it) => it.json())
     }
 
-    let promise;
-    $: promise = getTasks(status);
+    let unique = {};
 
     export function refreshList() {
-        promise = getTasks(status);
+        list = [];
+        page = 1;
+        unique = {};
     }
 
+    function changeList(s) {
+        refreshList();
+    }
+
+    $: {
+        changeList(status)
+    }
+
+    let page = 1;
+    let list = [];
+
+    function infiniteHandler({detail: {loaded, complete}}) {
+        fetch(`/api/tasks?status=${status}&page=${page}&count=5`)
+            .then(response => response.json())
+            .then(data => {
+                list = [...list, ...data];
+                if (data.length === 5) {
+                    page += 1;
+                    loaded();
+                } else {
+                    if (data.length !== 0)
+                        loaded();
+                    complete();
+                }
+            });
+    }
 </script>
 
 <style>
@@ -36,24 +63,22 @@
         font-size: 16pt;
     }
 
-    .task-not-found {
-        text-align: center;
-        padding: 30pt;
-        margin: 0 auto;
+    .tasks-wrapper {
+        overflow: auto;
     }
 </style>
 
-{#await promise then result}
-    {#if result.length === 0}
-        <div class="task-not-found">Нет задач</div>
-    {:else }
-        <VirtualList items={result} let:item>
+
+<div class="tasks-wrapper">
+    {#key unique}
+        {#each list as item}
             <div class="task" on:click={() => openTask(item.id)}>
                 <div class="task-title">{item.title}</div>
                 <div class="person-name">{item.performer}</div>
                 <div class="person-name">{item.probationer}</div>
             </div>
-        </VirtualList>
-    {/if}
-{/await}
+        {/each}
+        <InfiniteLoading on:infinite={infiniteHandler}/>
+    {/key}
+</div>
 

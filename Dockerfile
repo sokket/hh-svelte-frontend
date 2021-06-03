@@ -14,4 +14,3 @@ WORKDIR /usr/share/nginx/html/
 COPY --from=build /build/public/* ./
 COPY --from=build /build/public/build/ ./build
 COPY --from=build /build/node_modules/@fontsource/roboto/files/ ./build/files/
-RUN rm ./bundle.js.map

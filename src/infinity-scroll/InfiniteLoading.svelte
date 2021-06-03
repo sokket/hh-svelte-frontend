@@ -341,6 +341,7 @@
     {#if showNoMore}
         <div class="infinite-status-prompt">
             <slot name="noMore">
+                <div style="height: 15pt"></div>
             </slot>
         </div>
     {/if}

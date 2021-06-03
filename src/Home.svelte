@@ -65,7 +65,7 @@
 
 <div class="profile-block">
     <div class="user-name">{user.first_name + ' ' + user.last_name}</div>
-    <div class="team-name">{getRoleName(user.role_id)} в команде {user.team?.name}</div>
+    <div class="team-name">{getRoleName(user.role_id)} в команде {user.team.name}</div>
     {#if user.role_id === 2}
         <Button outline style="margin-right: 10pt" on:click={() => newTaskModalOpened = true}>Создать задачу</Button>
         <Button outline style="margin: 0" on:click={() => inviteLinkModalOpened = true}>Пригласить в команду</Button>

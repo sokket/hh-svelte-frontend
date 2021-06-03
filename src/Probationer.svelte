@@ -53,7 +53,7 @@
 <div class="profile-block">
     <div class="user-name">{person.first_name + ' ' + person.last_name}</div>
     {#await getAllInfo() then fullInfo}
-        <div class="team-name profile-sub-txt">{getRoleName(fullInfo.role_id)} в команде {fullInfo.team?.name}</div>
+        <div class="team-name profile-sub-txt">{getRoleName(fullInfo.role_id)} в команде {fullInfo.team.name}</div>
         <div class="team-name profile-sub-txt">Социальная оценка <b>{getRatingStr(fullInfo)}</b>
         </div>
     {/await}

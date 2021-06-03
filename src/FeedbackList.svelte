@@ -5,7 +5,6 @@
 
     let feedbackPage = 1;
     let feedbackList = [];
-    let feedbackItemHeight = {};
 
     function infiniteFeedbackHandler({detail: {loaded, complete}}) {
         fetch(`/api/feedback?user=${personId}&page=${feedbackPage}&count=5`)
