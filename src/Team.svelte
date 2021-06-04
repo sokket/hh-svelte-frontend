@@ -1,5 +1,4 @@
 <script>
-    import VirtualList from '@sveltejs/svelte-virtual-list';
     import {getPersons, getRoleName} from "./utils";
 </script>
 
@@ -15,14 +14,15 @@
 
     .person-name {
         font-size: 16pt;
+        margin-right: 15pt;
     }
 </style>
 
 {#await getPersons('performers') then performers}
-    <VirtualList items={performers} let:item>
+    {#each performers as item}
         <div class="person">
             <div class="person-name">{item.last_name} {item.first_name}</div>
             <div>{getRoleName(item.role_id)}</div>
         </div>
-    </VirtualList>
+    {/each}
 {/await}

@@ -1,5 +1,4 @@
 <script>
-    import VirtualList from '@sveltejs/svelte-virtual-list';
     import {Button, Card, Modal} from 'svelte-chota';
     import {getPersons} from "./utils";
     import RatePerson from "./RatePerson.svelte";
@@ -41,6 +40,7 @@
     }
 
     .person-name {
+        margin-right: 15pt;
         font-size: 16pt;
         flex: 1;
     }
@@ -59,11 +59,11 @@
 </Modal>
 
 {#await getPersons('probationers') then probationers}
-    <VirtualList items={probationers} let:item>
+    {#each probationers as item}
         <div class="person">
             <div class="person-name" on:click={() => openProbationer(item)}
                  style="cursor: {isManager() ? 'pointer' : 'default'}">{item.last_name} {item.first_name}</div>
             <Button outline style="margin: 0" on:click={() => openSocialRating(item)}>Оценка</Button>
         </div>
-    </VirtualList>
+    {/each}
 {/await}

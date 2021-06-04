@@ -59,6 +59,7 @@
 
     .profile-block {
         margin: 20pt;
+        flex-shrink: 0;
     }
 </style>
 
@@ -90,7 +91,7 @@
     </Card>
 </Modal>
 
-<Tabs full bind:active={tasksActiveTab}>
+<Tabs full style="flex-shrink: 0" bind:active={tasksActiveTab}>
     <Tab tabid="TODO" style="width: 30em">В очереди</Tab>
     <Tab tabid="IN_PROGRESS" style="width: 30em">В работе</Tab>
     <Tab tabid="DONE" style="width: 30em">Готово</Tab>
