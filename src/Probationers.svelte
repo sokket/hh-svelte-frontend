@@ -29,6 +29,7 @@
 
 <style>
     .person {
+        width: 100%;
         max-width: 400pt;
         margin: 5pt auto;
         padding: 10pt;
@@ -46,13 +47,13 @@
     }
 </style>
 
-<Modal style="width: 40%" bind:open={socialRatingModalOpened}>
+<Modal style="width: 60%" bind:open={socialRatingModalOpened}>
     <Card>
         <RatePerson person="{person}" closeModal="{() => socialRatingModalOpened = false}"/>
     </Card>
 </Modal>
 
-<Modal style="width: 40%" bind:open={probationerModalOpened}>
+<Modal style="width: 60%" bind:open={probationerModalOpened}>
     <Card>
         <Probationer person="{person}"/>
     </Card>

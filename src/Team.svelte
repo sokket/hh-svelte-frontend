@@ -4,6 +4,7 @@
 
 <style>
     .person {
+        width: 100%;
         max-width: 400pt;
         margin: 5pt auto;
         padding: 10pt;
